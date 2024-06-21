@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "title": "aaaaaaaaaa",
+      "description": "bbbbbbbbbbbbb",
+      "price": null,
+      "image": "https://svoboda.travel/images/marokko/marrakesh/Marrakesh.jpg",
+      "category": "",
+      "id": 1
+    }
+  ],
+  "category": [
+    {
+      "name": "cakes",
+      "id": 1
+    }
+  ]
+}
