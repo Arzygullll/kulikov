@@ -1,4 +1,3 @@
-// AddProduct.jsx
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useProduct } from "../../context/ProductContextProvider";
