@@ -1,4 +1,3 @@
-// AdminPage.jsx
 import React, { useState } from "react";
 import { Button, Container, Grid, Paper, Typography, Box } from "@mui/material";
 import AddProduct from "../components/products/AddProduct";
