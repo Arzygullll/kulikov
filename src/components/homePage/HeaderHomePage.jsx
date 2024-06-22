@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import ParallaxBackground from "./ParallaxBackground";
 
 const sections = [
   {
@@ -40,16 +41,9 @@ const sections = [
 
 const HeaderHomePage = () => {
   return (
-    <Box sx={{ bgcolor: "#E6E6FA", minHeight: "100vh" }}>
-      <Container maxWidth="xl" sx={{ mt: 4 }}>
-        <Box sx={{ textAlign: "center", mb: 4 }}>
-          <Typography variant="h3" sx={{ color: "#8A2BE2" }}>
-            Добро пожаловать в Куликовский
-          </Typography>
-          <Typography variant="h5" sx={{ color: "#8A2BE2" }}>
-            Наслаждайтесь лучшими кондитерскими изделиями в городе!
-          </Typography>
-        </Box>
+    <Box sx={{ bgcolor: "#E6E6FA", minHeight: "100vh", mt: 0 }}>
+      <Container maxWidth="xl" sx={{ mt: 4, p: 0 }}>
+        <ParallaxBackground />
         <Grid container spacing={4}>
           {sections.map((section) => (
             <Grid item key={section.id} xs={12} sm={6} md={4}>
@@ -57,7 +51,10 @@ const HeaderHomePage = () => {
                 <Card
                   sx={{
                     position: "relative",
-                    height: 765,
+                    height: "500px", // Adjusted height of the card
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    backgroundRepeat: "no-repeat", // No repeating background
                     "&:hover": {
                       "& .overlay": {
                         opacity: 1,
@@ -68,7 +65,7 @@ const HeaderHomePage = () => {
                   <CardMedia
                     component="img"
                     height="100%"
-                    image={section.imageUrl}
+                    image={section.imageUrl} // Dynamic image URL
                     alt={section.title}
                     sx={{ objectFit: "cover" }}
                   />
@@ -107,7 +104,7 @@ const HeaderHomePage = () => {
               variant="contained"
               sx={{ backgroundColor: "#8A2BE2", color: "#fff" }}
             >
-              Связаться с нами
+              Свяжитесь с нами
             </Button>
           </Link>
         </Box>
