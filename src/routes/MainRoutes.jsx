@@ -6,6 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import Contacts from "../pages/Contacts";
 import AdminPage from "../pages/AdminPage";
 import HeaderHomePage from "../components/homePage/HeaderHomePage";
+import CartPage from "../pages/CartPage";
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
@@ -15,7 +16,7 @@ const MainRoutes = () => {
     { id: 4, link: "/about", element: <AboutPage /> },
     { id: 5, link: "/contacts", element: <Contacts /> },
     { id: 6, link: "/admin", element: <AdminPage /> },
-    // { id: 7, link: "/cart", element: <CartPage /> },
+    { id: 7, link: "/cart", element: <CartPage /> },
   ];
   return (
     <Routes>

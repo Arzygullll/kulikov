@@ -19,7 +19,8 @@ import { useCart } from "../../context/CartContextProvider";
 const ProductCard = ({ elem }) => {
   const { deleteProduct } = useProduct();
   const navigate = useNavigate();
-  const { addProductToCart } = useCart();
+  const { addProductToCart, checkProductInCart, deleteProductFromCart } =
+    useCart();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -55,20 +56,23 @@ const ProductCard = ({ elem }) => {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h5" fontSize="20" fontWeight={700} component="div">
+        <Typography variant="h5" fontSize="16" fontWeight={700} component="div">
           {elem.title}
         </Typography>
         <Stack>
           <Rating name="half-rating" defaultValue={0} precision={1} />
         </Stack>
-        <Typography color="black" fontSize="24px" fontWeight={800}>
+        <Typography color="black" fontSize="22px" fontWeight={800}>
           ${elem.price}
         </Typography>
-        <Typography color="gray" fontSize="24px" fontWeight={800}>
+        <Typography color="gray" fontSize="12px" fontWeight={800}>
           {elem.description}
         </Typography>
         <Button
-          onClick={() => deleteProduct(elem.id)}
+          onClick={() => {
+            deleteProduct(elem.id);
+            deleteProductFromCart(elem.id);
+          }}
           color="secondary"
           variant="outlined"
           size="medium"
@@ -83,7 +87,13 @@ const ProductCard = ({ elem }) => {
         >
           Edit
         </Button>
-        <IconButton onClick={() => addProductToCart(elem)}>
+        <IconButton
+          sx={{
+            backgroundColor: checkProductInCart(elem.id) ? "black" : "",
+            color: checkProductInCart(elem.id) ? "white" : "",
+          }}
+          onClick={() => addProductToCart(elem)}
+        >
           <AddShoppingCart />
         </IconButton>
       </CardContent>

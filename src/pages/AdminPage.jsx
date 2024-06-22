@@ -1,96 +1,52 @@
+// AdminPage.jsx
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import CategorySelect from "../components/products/CategorySelect";
+import { Button, Container, Grid, Paper, Typography, Box } from "@mui/material";
+import AddProduct from "../components/products/AddProduct";
+import AddCategory from "../components/products/AddCategory";
 
-const AddProduct = () => {
-  const [activeInputIndex, setActiveInputIndex] = useState(0);
-  const [product, setProduct] = useState({
-    title: "",
-    description: "",
-    price: "",
-    image: "",
-    category: "",
-  });
-
-  const inputs = [
-    { label: "Title", name: "title", component: TextField },
-    { label: "Description", name: "description", component: TextField },
-    { label: "Price", name: "price", component: TextField },
-    { label: "Image", name: "image", component: TextField },
-    { label: "Category", name: "category", component: CategorySelect }, // Подставьте свой компонент CategorySelect
-  ];
-
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: value,
-    }));
-
-    // Активируем следующий инпут
-    if (activeInputIndex < inputs.length - 1) {
-      setActiveInputIndex((prevIndex) => prevIndex + 1);
-    }
+const AdminPage = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
   };
-
-  const handleClick = () => {
-    // Обработка сохранения продукта
-    console.log("Product:", product);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        maxWidth: "600px",
-        margin: "20px auto",
-        padding: "20px",
-        backgroundColor: "#ffffff",
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-        borderRadius: "8px",
-        textAlign: "center",
-      }}
-    >
-      <Typography variant="h4" gutterBottom>
-        Admin Page
-      </Typography>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => console.log("Add Category clicked")}
-        sx={{ marginBottom: "16px" }}
-      >
-        Add Category
-      </Button>
-      {inputs.map(
-        (input, index) =>
-          index <= activeInputIndex && (
-            <Box key={input.name} sx={{ marginBottom: "16px" }}>
-              <input.component
-                name={input.name}
-                label={input.label}
-                value={product[input.name]}
-                onChange={handleInput}
-                fullWidth
-                variant="outlined"
-                sx={{ backgroundColor: "#f9f9f9" }}
-              />
-            </Box>
-          )
-      )}
-      {activeInputIndex === inputs.length - 1 && (
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Box sx={{ textAlign: "center", mb: 4 }}>
+        <Typography variant="h3" gutterBottom sx={{ color: "#1976d2" }}>
+          ADMIN PAGE
+        </Typography>
         <Button
-          onClick={handleClick}
-          fullWidth
           variant="contained"
           color="primary"
-          sx={{ marginTop: "16px" }}
+          onClick={handleOpen}
+          sx={{ mt: 2 }}
         >
-          Add Product
+          Add Category
         </Button>
-      )}
-    </Box>
+      </Box>
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} md={6}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: "center",
+              backgroundColor: "#fafafa",
+              borderRadius: "10px",
+              paddingRight: "65px",
+            }}
+          >
+            <AddProduct />
+          </Paper>
+        </Grid>
+      </Grid>
+      <AddCategory open={open} handleClose={handleClose} />
+    </Container>
   );
 };
 
-export default AddProduct;
+export default AdminPage;

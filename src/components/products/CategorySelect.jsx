@@ -1,3 +1,4 @@
+// CategorySelect.jsx
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useEffect } from "react";
 import { useProduct } from "../../context/ProductContextProvider";
@@ -12,13 +13,11 @@ const CategorySelect = ({ handleInput }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Choose Category</InputLabel>
+        <InputLabel id="category-select-label">Choose Category</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          //   value={age}
+          labelId="category-select-label"
+          id="category-select"
           label="Category"
-          //   onChange={handleChange}
           name="category"
           onChange={handleInput}
         >

@@ -1,17 +1,15 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
-import { API, API_CATEGORY } from "../helpers/const";
 import axios from "axios";
-
+import React, { createContext, useContext, useReducer } from "react";
+import { API, API_CATEGORY } from "../helpers/const";
+import { useNavigate } from "react-router-dom";
 export const productContext = createContext();
 export const useProduct = () => useContext(productContext);
 
 const INIT_STATE = {
   products: [],
-  oneProduct: [],
+  oneProduct: {},
   categories: [],
 };
-
 const ProductContextProvider = ({ children }) => {
   const reducer = (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -19,20 +17,18 @@ const ProductContextProvider = ({ children }) => {
         return { ...state, products: action.payload };
       case "GET_ONE_PRODUCT":
         return { ...state, oneProduct: action.payload };
-      case "GET_CATEGORIES":
+      case "GET_CATEGORIS":
         return { ...state, categories: action.payload };
     }
   };
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
-
-  // ! CREATE
+  //! create
   const createProduct = async (newProduct) => {
     await axios.post(API, newProduct);
     navigate("/products");
   };
-
-  //! GET
+  //! get
   const getProducts = async () => {
     const { data } = await axios(`${API}${window.location.search}`);
     dispatch({
@@ -40,47 +36,37 @@ const ProductContextProvider = ({ children }) => {
       payload: data,
     });
   };
-
-  //!DELETE
+  //! delete
   const deleteProduct = async (id) => {
     await axios.delete(`${API}/${id}`);
     getProducts();
   };
-
+  //! getOneProduct
   const getOneProduct = async (id) => {
     const { data } = await axios(`${API}/${id}`);
-
     dispatch({
       type: "GET_ONE_PRODUCT",
       payload: data,
     });
   };
-  //! Edit
-
+  //! edit
   const editProduct = async (id, editedProduct) => {
-    console.log(id, editProduct);
     await axios.patch(`${API}/${id}`, editedProduct);
     navigate("/products");
   };
-
-  //! getOneProduct
-
-  //! Create Category
+  //! createCategory
   const createCategory = async (newCategory) => {
     await axios.post(API_CATEGORY, newCategory);
     navigate("/products");
   };
-
-  //! Get Categories
-
+  //! getCategories
   const getCategories = async () => {
     const { data } = await axios(API_CATEGORY);
     dispatch({
-      type: "GET_CATEGORIES",
+      type: "GET_CATEGORIS",
       payload: data,
     });
   };
-
   //! filter
   const fetchByParams = (query, value) => {
     const search = new URLSearchParams(window.location.search);
@@ -92,13 +78,12 @@ const ProductContextProvider = ({ children }) => {
     const url = `${window.location.pathname}?${search}`;
     navigate(url);
   };
-
   const values = {
     createProduct,
     getProducts,
-    getOneProduct,
     products: state.products,
     deleteProduct,
+    getOneProduct,
     oneProduct: state.oneProduct,
     editProduct,
     createCategory,
@@ -106,13 +91,8 @@ const ProductContextProvider = ({ children }) => {
     categories: state.categories,
     fetchByParams,
   };
-
   return (
-    <div>
-      <productContext.Provider value={values}>
-        {children}
-      </productContext.Provider>
-    </div>
+    <productContext.Provider value={values}>{children}</productContext.Provider>
   );
 };
 

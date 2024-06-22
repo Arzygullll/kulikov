@@ -8,16 +8,22 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
-import { MenuItem } from "@mui/material";
+import { Badge, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
+import { useCart } from "../../context/CartContextProvider";
+import { getProductsCountInCart } from "../../helpers/functions";
 
-// URL логотипа
 const logoUrl = "https://your-logo-url.com/logo.png";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [badgeCount, setBadgeCount] = React.useState(0);
+  const { addProductToCart } = useCart();
+  React.useEffect(() => {
+    setBadgeCount(getProductsCountInCart);
+  }, [addProductToCart]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -44,10 +50,10 @@ function Navbar() {
     <AppBar
       style={{
         backgroundColor: "#8A2BE2",
-        color: "#ffffff", // белый цвет текста для хорошего контраста
+        color: "#ffffff",
         marginBottom: "-32px",
+        position: "absolute",
       }}
-      position="static"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -63,7 +69,7 @@ function Navbar() {
               fontWeight: 700,
               fontSize: 30,
               letterSpacing: ".3rem",
-              color: "#ffffff", // белый цвет текста
+              color: "#ffffff",
               textDecoration: "none",
             }}
           >
@@ -164,9 +170,13 @@ function Navbar() {
           >
             Куликовский
           </Typography>
-          <Box sx={{ flexGrow: 1 }}></Box>
-          <Link to={"/cart"} style={{ color: "#ffffff", marginRight: 15 }}>
-            <ShoppingCart />
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Link to={"/cart"}>
+            <Badge badgeContent={badgeCount} color="success">
+              <ShoppingCart setBadgeCount sx={{ color: "white" }} />
+            </Badge>
+            {/* <ShoppingCart sx={{ color: "white" }} /> */}
           </Link>
 
           <Box sx={{ flexGrow: 0 }}>

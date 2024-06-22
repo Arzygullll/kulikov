@@ -24,7 +24,7 @@ const SideBar = () => {
     setSearchParams({ q: search });
   }, [search]);
   return (
-    <Paper sx={{ p: 2, margin: "50px", width: "300px" }}>
+    <Paper sx={{ p: 2, margin: "25px 5px", width: "300px" }}>
       <TextField
         fullWidth
         label="search..."
