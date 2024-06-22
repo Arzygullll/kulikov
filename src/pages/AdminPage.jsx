@@ -15,7 +15,7 @@ const AdminPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Box sx={{ textAlign: "center", mb: 4 }}>
+      <Box sx={{ textAlign: "center", mb: 4, marginTop: "80px" }}>
         <Typography variant="h3" gutterBottom sx={{ color: "#1976d2" }}>
           ADMIN PAGE
         </Typography>

@@ -51,10 +51,10 @@ const HeaderHomePage = () => {
                 <Card
                   sx={{
                     position: "relative",
-                    height: "500px", // Adjusted height of the card
+                    height: "700px",
                     borderRadius: "16px",
                     overflow: "hidden",
-                    backgroundRepeat: "no-repeat", // No repeating background
+                    backgroundRepeat: "no-repeat",
                     "&:hover": {
                       "& .overlay": {
                         opacity: 1,
@@ -65,7 +65,7 @@ const HeaderHomePage = () => {
                   <CardMedia
                     component="img"
                     height="100%"
-                    image={section.imageUrl} // Dynamic image URL
+                    image={section.imageUrl}
                     alt={section.title}
                     sx={{ objectFit: "cover" }}
                   />

@@ -40,16 +40,11 @@ const Cart = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component={"th"} scope="row">
-                  <img
-                    style={{ border: "2px solid pink" }}
-                    src={elem.item.image}
-                    alt=""
-                    width={70}
-                  />
+                  <img src={elem.item.image} alt="" width={80} height={65} />
                 </TableCell>
                 <TableCell>{elem.item.title}</TableCell>
                 <TableCell>{elem.item.category}</TableCell>
-                <TableCell>{elem.item.price}$</TableCell>
+                <TableCell>{elem.item.price}сом</TableCell>
                 <TableCell>
                   <input
                     type="number"
@@ -61,7 +56,7 @@ const Cart = () => {
                     }
                   />
                 </TableCell>
-                <TableCell>{elem.subPrice}$</TableCell>
+                <TableCell>{elem.subPrice}сом</TableCell>
                 <TableCell>
                   <Button onClick={(e) => deleteProductFromCart(elem.item.id)}>
                     DELETE

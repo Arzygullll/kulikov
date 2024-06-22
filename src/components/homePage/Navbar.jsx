@@ -119,7 +119,7 @@ function Navbar() {
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
-                      sx={{ color: "#8A2BE2", textTransform: "uppercase" }}
+                      sx={{ color: "b56ef7", textTransform: "uppercase" }}
                     >
                       {elem.title}
                     </Typography>
