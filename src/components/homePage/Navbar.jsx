@@ -42,7 +42,11 @@ function Navbar() {
 
   return (
     <AppBar
-      style={{ backgroundColor: "#E6E6FA", color: "#8A2BE2" }}
+      style={{
+        backgroundColor: "#8A2BE2",
+        color: "#ffffff", // белый цвет текста для хорошего контраста
+        marginBottom: "-32px",
+      }}
       position="static"
     >
       <Container maxWidth="xl">
@@ -59,7 +63,7 @@ function Navbar() {
               fontWeight: 700,
               fontSize: 30,
               letterSpacing: ".3rem",
-              color: "#8A2BE2",
+              color: "#ffffff", // белый цвет текста
               textDecoration: "none",
             }}
           >
@@ -128,7 +132,7 @@ function Navbar() {
               >
                 <MenuItem>
                   <Typography
-                    sx={{ color: "#8A2BE2", textTransform: "uppercase" }}
+                    sx={{ color: "#ffffff", textTransform: "uppercase" }}
                   >
                     {elem.title}
                   </Typography>
@@ -136,7 +140,7 @@ function Navbar() {
               </Link>
             ))}
             <Link to={"/admin"} style={{ textDecoration: "none" }}>
-              <MenuItem sx={{ color: "#8A2BE2", display: "block" }}>
+              <MenuItem sx={{ color: "#ffffff", display: "block" }}>
                 <Typography textAlign={"center"}>ADMIN</Typography>
               </MenuItem>
             </Link>
@@ -154,14 +158,14 @@ function Navbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "#8A2BE2",
+              color: "#ffffff",
               textDecoration: "none",
             }}
           >
             Куликовский
           </Typography>
           <Box sx={{ flexGrow: 1 }}></Box>
-          <Link to={"/cart"} style={{ color: "#8A2BE2", marginRight: 15 }}>
+          <Link to={"/cart"} style={{ color: "#ffffff", marginRight: 15 }}>
             <ShoppingCart />
           </Link>
 
