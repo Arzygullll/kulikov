@@ -1,23 +1,93 @@
 import React, { useState } from "react";
-import AddProduct from "../components/products/AddProduct";
-import AddCategory from "../components/products/AddCategory";
-import { Button } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import CategorySelect from "../components/products/CategorySelect";
 
 const AdminPage = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [activeInputIndex, setActiveInputIndex] = useState(0);
+  const [product, setProduct] = useState({
+    title: "",
+    description: "",
+    price: "",
+    image: "",
+    category: "",
+  });
+
+  const inputs = [
+    { label: "Title", name: "title", component: TextField },
+    { label: "Description", name: "description", component: TextField },
+    { label: "Price", name: "price", component: TextField },
+    { label: "Image", name: "image", component: TextField },
+    { label: "Category", name: "category", component: CategorySelect },
+  ];
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
+
+    if (activeInputIndex < inputs.length - 1) {
+      setActiveInputIndex((prevIndex) => prevIndex + 1);
+    }
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleClick = () => {
+    console.log("Product:", product);
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Add Category</Button>
-      <AddProduct />
-      <AddCategory open={open} handleClose={handleClose} />
-    </div>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "600px",
+        margin: "20px auto",
+        padding: "20px",
+        backgroundColor: "#ffffff",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
+        textAlign: "center",
+      }}
+    >
+      <Typography variant="h4" gutterBottom>
+        Admin Page
+      </Typography>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => console.log("Add Category clicked")}
+        sx={{ marginBottom: "16px" }}
+      >
+        Add Category
+      </Button>
+      {inputs.map(
+        (input, index) =>
+          index <= activeInputIndex && (
+            <Box key={input.name} sx={{ marginBottom: "16px" }}>
+              <input.component
+                name={input.name}
+                label={input.label}
+                value={product[input.name]}
+                onChange={handleInput}
+                fullWidth
+                variant="outlined"
+                sx={{ backgroundColor: "#f9f9f9" }}
+              />
+            </Box>
+          )
+      )}
+      {activeInputIndex === inputs.length - 1 && (
+        <Button
+          onClick={handleClick}
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ marginTop: "16px" }}
+        >
+          Add Product
+        </Button>
+      )}
+    </Box>
   );
 };
 
