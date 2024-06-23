@@ -1,7 +1,15 @@
-import { Box, Modal, Typography, Paper, Grid } from "@mui/material";
+import { Box, Modal, Typography, Paper, Grid, IconButton } from "@mui/material";
 import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useProduct } from "../../context/ProductContextProvider";
 
 const Detail = ({ elem, open, handleClose }) => {
+  const { deleteComment } = useProduct();
+
+  const handleDeleteComment = (commentIndex) => {
+    deleteComment(elem.id, commentIndex);
+  };
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -70,10 +78,17 @@ const Detail = ({ elem, open, handleClose }) => {
                       : "1px solid gray",
                   width: "90%",
                   textAlign: "center",
+                  position: "relative",
                 }}
               >
                 <Typography variant="subtitle2">{comment.name}</Typography>
                 <Typography variant="body2">{comment.comment}</Typography>
+                <IconButton
+                  sx={{ position: "absolute", top: 0, right: 0, p: 0.5 }}
+                  onClick={() => handleDeleteComment(index)}
+                >
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
               </Paper>
             ))
           ) : (
