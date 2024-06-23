@@ -8,16 +8,22 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
-import { MenuItem } from "@mui/material";
+import { Badge, MenuItem, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
+import { useCart } from "../../context/CartContextProvider";
+import { getProductsCountInCart } from "../../helpers/functions";
 
-// URL логотипа
 const logoUrl = "https://your-logo-url.com/logo.png";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [badgeCount, setBadgeCount] = React.useState(0);
+  const { addProductToCart } = useCart();
+  React.useEffect(() => {
+    setBadgeCount(getProductsCountInCart);
+  }, [addProductToCart]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,20 +40,16 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const pages = [
-    { id: 1, title: "Products", link: "/products" },
-    { id: 2, title: "About", link: "./about" },
-    { id: 3, title: "Contacts", link: "./contacts" },
-  ];
+  const pages = [];
 
   return (
     <AppBar
       style={{
         backgroundColor: "#8A2BE2",
-        color: "#ffffff", // белый цвет текста для хорошего контраста
+        color: "#ffffff",
         marginBottom: "-32px",
+        position: "absolute",
       }}
-      position="static"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -63,7 +65,7 @@ function Navbar() {
               fontWeight: 700,
               fontSize: 30,
               letterSpacing: ".3rem",
-              color: "#ffffff", // белый цвет текста
+              color: "#ffffff",
               textDecoration: "none",
             }}
           >
@@ -113,7 +115,7 @@ function Navbar() {
                 >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography
-                      sx={{ color: "#8A2BE2", textTransform: "uppercase" }}
+                      sx={{ color: "b56ef7", textTransform: "uppercase" }}
                     >
                       {elem.title}
                     </Typography>
@@ -141,7 +143,7 @@ function Navbar() {
             ))}
             <Link to={"/admin"} style={{ textDecoration: "none" }}>
               <MenuItem sx={{ color: "#ffffff", display: "block" }}>
-                <Typography textAlign={"center"}>ADMIN</Typography>
+                <Typography textAlign={"center"}>АДМИН</Typography>
               </MenuItem>
             </Link>
           </Box>
@@ -164,12 +166,21 @@ function Navbar() {
           >
             Куликовский
           </Typography>
-          <Box sx={{ flexGrow: 1 }}></Box>
-          <Link to={"/cart"} style={{ color: "#ffffff", marginRight: 15 }}>
-            <ShoppingCart />
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Link to={"/cart"}>
+            <Badge badgeContent={badgeCount} color="success">
+              <ShoppingCart setBadgeCount sx={{ color: "white" }} />
+            </Badge>
           </Link>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Button color="inherit" component={Link} to="/login">
+              Вход
+            </Button>
+            <Button color="inherit" component={Link} to="/signup">
+              Регистрация
+            </Button>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}

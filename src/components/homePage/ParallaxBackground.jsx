@@ -21,7 +21,7 @@ const ParallaxBackground = () => {
     <Box
       sx={{
         position: "relative",
-        height: "75vh",
+        height: "80vh",
         overflow: "hidden",
         mb: 4,
       }}

@@ -7,15 +7,17 @@ import { useSearchParams } from "react-router-dom";
 
 const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { getProducts, products } = useProduct();
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     getProducts();
   }, [searchParams]);
 
-  const { getProducts, products } = useProduct();
-  const [page, setPage] = useState(1);
   useEffect(() => {
     getProducts();
   }, []);
+
   const itemsPerPage = 6;
   const countPage = Math.ceil(products.length / itemsPerPage);
 
@@ -30,18 +32,23 @@ const ProductList = () => {
   };
 
   return (
-    <div>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-        {currentData().map((elem) => (
-          <ProductCard key={elem.id} elem={elem} />
-        ))}
-      </Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "20px",
+        justifyContent: "center",
+      }}
+    >
+      {currentData().map((elem) => (
+        <ProductCard key={elem.id} elem={elem} />
+      ))}
       <PaginationControlled
         page={page}
         countPage={countPage}
         handleChange={handleChange}
       />
-    </div>
+    </Box>
   );
 };
 

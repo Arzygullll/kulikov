@@ -6,6 +6,8 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Typography,
+  Box,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useProduct } from "../../context/ProductContextProvider";
@@ -17,39 +19,55 @@ const SideBar = () => {
     getCategories();
   }, []);
 
-  // ! search
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("q") || "");
   useEffect(() => {
     setSearchParams({ q: search });
   }, [search]);
+
   return (
-    <Paper sx={{ p: 2, margin: "50px", width: "300px" }}>
-      <TextField
-        fullWidth
-        label="search..."
-        variant="standard"
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Category</FormLabel>
+    <Paper
+      sx={{
+        p: 3,
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        position: "fixed",
+        top: 50,
+        left: 0,
+        width: "300px",
+        height: "calc(100vh - 70px)",
+        overflowY: "auto",
+        zIndex: 1000,
+      }}
+    >
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          fullWidth
+          label="Поиск..."
+          variant="outlined"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          sx={{ mb: 2 }}
+        />
+      </Box>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Категории</FormLabel>
         <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-          name="radio-buttons-group"
+          aria-label="category"
+          name="category"
           onChange={(e) => fetchByParams("category", e.target.value)}
         >
           <FormControlLabel
-            value={"all"}
+            value="all"
             control={<Radio />}
-            label="All Clothing"
+            label="Весь ассортимент"
           />
           {categories.map((elem) => (
             <FormControlLabel
               key={elem.id}
               value={elem.name}
-              label={elem.name}
               control={<Radio />}
+              label={elem.name}
             />
           ))}
         </RadioGroup>
