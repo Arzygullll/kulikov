@@ -12,7 +12,7 @@ const ProductList = () => {
 
   useEffect(() => {
     getProducts();
-  }, [searchParams, getProducts]);
+  }, [searchParams]);
 
   useEffect(() => {
     getProducts();
