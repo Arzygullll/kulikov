@@ -6,7 +6,13 @@
       "price": 850,
       "image": "https://nambafood.kg/dish_image/135642.png",
       "category": "Торты Гранд",
-      "id": 1
+      "id": 1,
+      "comments": [
+        {
+          "name": "Naomi",
+          "comment": "Хороший тортик:3"
+        }
+      ]
     },
     {
       "title": "Торт «Медовик со сливками» гранд 0,850 кг",
@@ -14,7 +20,8 @@
       "price": 850,
       "image": "https://nambafood.kg/dish_image/71692.png",
       "category": "Торты Гранд",
-      "id": 2
+      "id": 2,
+      "comments": []
     },
     {
       "title": "Торт «Нежный со сгущенкой» Гранд 0,950 кг",
