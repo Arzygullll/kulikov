@@ -8,7 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
-import { Badge, MenuItem } from "@mui/material";
+import { Badge, MenuItem, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import { useCart } from "../../context/CartContextProvider";
@@ -40,11 +40,7 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const pages = [
-    // { id: 1, title: "", link: "/products" },
-    // { id: 2, title: "About", link: "./about" },
-    // { id: 3, title: "Contacts", link: "./contacts" },
-  ];
+  const pages = [];
 
   return (
     <AppBar
@@ -147,7 +143,7 @@ function Navbar() {
             ))}
             <Link to={"/admin"} style={{ textDecoration: "none" }}>
               <MenuItem sx={{ color: "#ffffff", display: "block" }}>
-                <Typography textAlign={"center"}>ADMIN</Typography>
+                <Typography textAlign={"center"}>АДМИН</Typography>
               </MenuItem>
             </Link>
           </Box>
@@ -176,10 +172,15 @@ function Navbar() {
             <Badge badgeContent={badgeCount} color="success">
               <ShoppingCart setBadgeCount sx={{ color: "white" }} />
             </Badge>
-            {/* <ShoppingCart sx={{ color: "white" }} /> */}
           </Link>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Button color="inherit" component={Link} to="/login">
+              Вход
+            </Button>
+            <Button color="inherit" component={Link} to="/signup">
+              Регистрация
+            </Button>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
