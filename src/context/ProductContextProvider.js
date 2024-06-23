@@ -91,6 +91,20 @@ const ProductContextProvider = ({ children }) => {
     getProducts();
   };
 
+  //! deleteComment
+  const deleteComment = async (productId, commentIndex) => {
+    const { data } = await axios.get(`${API}/${productId}`);
+    const updatedComments = data.comments.filter(
+      (_, index) => index !== commentIndex
+    );
+    const updatedProduct = {
+      ...data,
+      comments: updatedComments,
+    };
+    await axios.patch(`${API}/${productId}`, updatedProduct);
+    getProducts();
+  };
+
   //! filter
   const fetchByParams = (query, value) => {
     const search = new URLSearchParams(window.location.search);
@@ -116,6 +130,7 @@ const ProductContextProvider = ({ children }) => {
     categories: state.categories,
     fetchByParams,
     addComment,
+    deleteComment,
   };
 
   return (
