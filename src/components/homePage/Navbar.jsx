@@ -41,9 +41,9 @@ function Navbar() {
   };
 
   const pages = [
-    { id: 1, title: "Products", link: "/products" },
-    { id: 2, title: "About", link: "./about" },
-    { id: 3, title: "Contacts", link: "./contacts" },
+    // { id: 1, title: "", link: "/products" },
+    // { id: 2, title: "About", link: "./about" },
+    // { id: 3, title: "Contacts", link: "./contacts" },
   ];
 
   return (

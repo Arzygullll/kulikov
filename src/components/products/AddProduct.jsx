@@ -17,11 +17,15 @@ const AddProduct = () => {
   });
 
   const inputs = [
-    { label: "Title", name: "title", component: TextField },
-    { label: "Description", name: "description", component: TextField },
-    { label: "Price", name: "price", component: TextField },
-    { label: "Image", name: "image", component: TextField },
-    { label: "Category", name: "category", component: CategorySelect },
+    { label: "Название", name: "title", component: TextField },
+    { label: "Описание", name: "description", component: TextField },
+    { label: "Цена", name: "price", component: TextField },
+    { label: "Изображение", name: "image", component: TextField },
+    {
+      label: "category",
+      name: "category",
+      component: CategorySelect,
+    },
   ];
 
   const handleInput = (e) => {
@@ -31,7 +35,6 @@ const AddProduct = () => {
       [name]: name === "price" ? Number(value) : value,
     }));
 
-    // Активируем следующий инпут только если текущий инпут не пустой
     if (value && activeInputIndex < inputs.length - 1) {
       setActiveInputIndex((prevIndex) => prevIndex + 1);
     }
@@ -55,7 +58,7 @@ const AddProduct = () => {
       }}
     >
       <Typography variant="h5" gutterBottom sx={{ color: "#1976d2" }}>
-        Add Product
+        Добавить продукт
       </Typography>
       {inputs.map(
         (input, index) =>
@@ -81,7 +84,7 @@ const AddProduct = () => {
           color="primary"
           sx={{ marginTop: "16px" }}
         >
-          Add Product
+          Добавить продукт
         </Button>
       )}
     </Box>

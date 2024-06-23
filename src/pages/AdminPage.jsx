@@ -17,7 +17,7 @@ const AdminPage = () => {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Box sx={{ textAlign: "center", mb: 4, marginTop: "80px" }}>
         <Typography variant="h3" gutterBottom sx={{ color: "#1976d2" }}>
-          ADMIN PAGE
+          СТРАНИЦА АДМИНИСТРАТОРА
         </Typography>
         <Button
           variant="contained"
@@ -25,7 +25,7 @@ const AdminPage = () => {
           onClick={handleOpen}
           sx={{ mt: 2 }}
         >
-          Add Category
+          Добавить категорию
         </Button>
       </Box>
       <Grid container spacing={4} justifyContent="center">
@@ -37,7 +37,7 @@ const AdminPage = () => {
               textAlign: "center",
               backgroundColor: "#fafafa",
               borderRadius: "10px",
-              paddingRight: "65px",
+              paddingRight: "30px",
             }}
           >
             <AddProduct />

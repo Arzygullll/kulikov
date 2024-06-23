@@ -75,14 +75,14 @@ const ProductCard = ({ elem }) => {
               deleteProductFromCart(elem.id);
             }}
           >
-            Delete
+            Удалить
           </Button>
           <Button
             variant="outlined"
             color="primary"
             onClick={() => navigate(`/edit/${elem.id}`)}
           >
-            Edit
+            Редактировать
           </Button>
           <IconButton
             sx={{

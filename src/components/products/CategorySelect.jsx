@@ -13,7 +13,7 @@ const CategorySelect = ({ handleInput }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="category-select-label">Choose Category</InputLabel>
+        <InputLabel id="category-select-label">Выберите категорию</InputLabel>
         <Select
           labelId="category-select-label"
           id="category-select"

@@ -43,7 +43,7 @@ const SideBar = () => {
       <Box sx={{ mb: 2 }}>
         <TextField
           fullWidth
-          label="Search..."
+          label="Поиск..."
           variant="outlined"
           value={search}
           onChange={(e) => setSearch(e.target.value)}

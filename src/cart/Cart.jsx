@@ -59,7 +59,7 @@ const Cart = () => {
                 <TableCell>{elem.subPrice}сом</TableCell>
                 <TableCell>
                   <Button onClick={(e) => deleteProductFromCart(elem.item.id)}>
-                    DELETE
+                    Удалить
                   </Button>
                 </TableCell>
               </TableRow>
@@ -67,7 +67,7 @@ const Cart = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button>BUY NOW {cart.totalPrice}</Button>
+      <Button>КУПИТЬ СЕЙЧАС {cart.totalPrice}сом</Button>
     </div>
   );
 };
