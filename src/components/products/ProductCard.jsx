@@ -14,20 +14,32 @@ import React, { useState } from "react";
 import { useProduct } from "../../context/ProductContextProvider";
 import { useNavigate } from "react-router-dom";
 import Detail from "./Detail";
-import { AddShoppingCart } from "@mui/icons-material";
+import { AddShoppingCart, Comment as CommentIcon } from "@mui/icons-material";
 import { useCart } from "../../context/CartContextProvider";
+import CommentModal from "./CommentModal";
 
 const ProductCard = ({ elem }) => {
   const { deleteProduct } = useProduct();
   const navigate = useNavigate();
   const { addProductToCart, checkProductInCart, deleteProductFromCart } =
     useCart();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [openDetail, setOpenDetail] = useState(false);
+  const [openComment, setOpenComment] = useState(false);
+
+  const handleOpenDetail = () => {
+    setOpenDetail(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+
+  const handleCloseDetail = () => {
+    setOpenDetail(false);
+  };
+
+  const handleOpenComment = () => {
+    setOpenComment(true);
+  };
+
+  const handleCloseComment = () => {
+    setOpenComment(false);
   };
 
   const isProductInCart = checkProductInCart(elem.id);
@@ -45,7 +57,7 @@ const ProductCard = ({ elem }) => {
         },
       }}
     >
-      <CardActionArea onClick={handleOpen}>
+      <CardActionArea onClick={handleOpenDetail}>
         <CardMedia
           component="img"
           height="240"
@@ -53,6 +65,7 @@ const ProductCard = ({ elem }) => {
           alt={elem.title}
         />
       </CardActionArea>
+
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {elem.title}
@@ -92,9 +105,17 @@ const ProductCard = ({ elem }) => {
           >
             <AddShoppingCart />
           </IconButton>
+          <IconButton sx={{ color: "gray" }} onClick={handleOpenComment}>
+            <CommentIcon />
+          </IconButton>
         </Box>
       </CardContent>
-      <Detail elem={elem} open={open} handleClose={handleClose} />
+      <Detail elem={elem} open={openDetail} handleClose={handleCloseDetail} />
+      <CommentModal
+        open={openComment}
+        handleClose={handleCloseComment}
+        productId={elem.id}
+      />
     </Card>
   );
 };
